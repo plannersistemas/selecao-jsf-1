@@ -8,11 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tarefa")
-public class Tarefas implements Serializable{
+@NamedQueries({
+	@NamedQuery(name="Tarefa.listarTodas", query= "SELECT t FROM Tarefa t")
+})
+
+public class Tarefa implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -50,4 +56,11 @@ public class Tarefas implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	@Override
+	public String toString() {
+		return "Tarefas [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", usuario=" + usuario + "]";
+	}
+	
+	
 }

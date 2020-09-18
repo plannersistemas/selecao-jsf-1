@@ -6,21 +6,63 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<ui:composition template="_template.xhtml">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Login</title>
+	
+</h:head>
+<h:body>
+	<p:growl id="mensagem"/>
+	
+	<p:dialog header="Login" closable="false" 
+		resizable="false" draggable="false" visible="true">
+		<h:form>
+			<h:panelGrid columns="2">
+				<p:outputLabel for="login" value="login" />
+				<p:inputMask id="login" value="#{loginBean.usuario.login}" 
+					required="true" requiredMessage="O campo login é obrigatório"/>
+				
+				<p:outputLabel for="senha" value="senha"/>
+				<p:password id="senha" value="#{loginBean.usuario.senha}"
+					maxlength="8" size="20" required="true" requiredMessage="O campo senha é obrigatório"/>
+				
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Entrar" actionListener="#{loginBean.autenticar}"
+					update="mensagem"/>
+					
+				<p:commandButton value="Novo Usuário" actionListener="#{usuarioBean.novo}"
+					oncomplete="PF('dglCadastroUsuario').show();"
+					update="mensagem"/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+	<!-- modal para novo usuario -->
+	<p:dialog header="Usuário Cadastro" widgetVar="dglCadastroUsuario"
+				draggable="false"  resizable="false" modal="true">
+				<h:form id="formCadUsuario">
+					<h:panelGrid columns="2" id="pnlCadUsuario">
+						<p:outputLabel value="Nome usuário:" />
+						<p:inputText value="#{usuarioBean.usuarioNovoLogin.usuario}" size="20"/>
+						
+						<p:outputLabel value="Login usuário:" />
+						<p:inputText value="#{usuarioBean.usuarioNovoLogin.login}" size="20"/>
+						
+						<p:outputLabel value="Senha usuário:" />
+						<p:password value="#{usuarioBean.usuarioNovoLogin.senha}" size="20"/>
+						
+						<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvarNovoLogin()}"
+							update=":mensagem :formCadUsuario:pnlCadUsuario" />
+						<p:commandButton value="Fechar" oncomplete="PF('dglCadastroUsuario').hide();"/>
+					</h:panelGrid>
+				</h:form>
+			
+			</p:dialog>
 
-		<ui:define name="titulo">
-				<p:outputPanel>Login</p:outputPanel>
-		</ui:define>
+	
 
-		<ui:define name="conteudo">
-		
-			<p:messages globalOnly="true" />
-		
-			<h:form id="login">
-				<p:outputLabel value="#{loginBean.title}" />
-			</h:form>
-		</ui:define>
+	
 
-	</ui:composition>
-
+</h:body>
 </html>
