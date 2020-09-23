@@ -12,6 +12,15 @@
 		<deltaspike.version>1.4.1</deltaspike.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<!-- Servlet -->
 		<dependency>
@@ -66,6 +75,14 @@
 			<version>5.2</version>
 			<scope>compile</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.primefaces.themes/all-themes -->
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+
 
 		<!-- <dependency> <groupId>org.primefaces.themes</groupId> <artifactId>south-street</artifactId> 
 			<version>1.0.10</version> </dependency> -->

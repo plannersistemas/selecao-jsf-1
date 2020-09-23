@@ -31,34 +31,16 @@
 				<p:commandButton value="Entrar" actionListener="#{loginBean.autenticar}"
 					update="mensagem"/>
 					
-				<p:commandButton value="Novo Usuário" actionListener="#{usuarioBean.novo}"
-					oncomplete="PF('dglCadastroUsuario').show();"
-					update="mensagem"/>
+
+				
 			</h:panelGrid>
+		</h:form>
+		<h:form>
+			<h:commandButton value="Novo usuario" action="#{newUserBean.nova()}" />
 		</h:form>
 	</p:dialog>
 	
-	<!-- modal para novo usuario -->
-	<p:dialog header="Usuário Cadastro" widgetVar="dglCadastroUsuario"
-				draggable="false"  resizable="false" modal="true">
-				<h:form id="formCadUsuario">
-					<h:panelGrid columns="2" id="pnlCadUsuario">
-						<p:outputLabel value="Nome usuário:" />
-						<p:inputText value="#{usuarioBean.usuarioNovoLogin.usuario}" size="20"/>
-						
-						<p:outputLabel value="Login usuário:" />
-						<p:inputText value="#{usuarioBean.usuarioNovoLogin.login}" size="20"/>
-						
-						<p:outputLabel value="Senha usuário:" />
-						<p:password value="#{usuarioBean.usuarioNovoLogin.senha}" size="20"/>
-						
-						<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvarNovoLogin()}"
-							update=":mensagem :formCadUsuario:pnlCadUsuario" />
-						<p:commandButton value="Fechar" oncomplete="PF('dglCadastroUsuario').hide();"/>
-					</h:panelGrid>
-				</h:form>
-			
-			</p:dialog>
+	
 
 	
 

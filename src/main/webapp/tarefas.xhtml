@@ -12,7 +12,7 @@
 
 	<title>Sistema Seleção Planner</title>
 	<h:outputStylesheet library="css" name="jquery-ui.min.css"/>
-	<h:outputStylesheet library="primefaces-my-custom-theme" name="theme.css"/> 
+	<h:outputStylesheet library="css" name="theme.css"/> 
 	<!-- configuracao abaixo para o calendario em Pt-Br -->
 	<script type="text/javascript" src="pt.js"></script>
 	<script  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
@@ -58,7 +58,7 @@
 		<div id="conteudo">
 			<ui:insert name="conteudo" />
 			<h:form id="formListaTarefa" >
-				<p:dataTable id="tblTarefa" value="#{tarefaBean.tarefas}" var="tarefaVar" 
+				<p:dataTable id="tblTarefa" value="#{tarefaBean.tarefas}" var="tarefaVar" styleClass="ui-widget"
 					emptyMessage="Nenhum registro encontrado" paginator="True">
 					
 					<p:column headerText="ID.TAREFA">
@@ -81,7 +81,7 @@
 			</h:form>
 			
 			<!-- janela modal -->
-			<p:dialog header="Tarefa Cadastro" widgetVar="dglCadastroTarefa"
+			<p:dialog header="TAREFA CADASTRO" widgetVar="dglCadastroTarefa" styleClass="ui-dialog"
 				draggable="false"  resizable="false" modal="true">
 				<h:form id="formCadTarefa">
 					<h:panelGrid id="plnCadTarefa" columns="2">
