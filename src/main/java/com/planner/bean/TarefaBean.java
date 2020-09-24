@@ -12,7 +12,7 @@ import javax.faces.bean.ViewScoped;
 import org.omnifaces.util.Messages;
 
 import com.planner.dao.TarefaDAO;
-
+import com.planner.dao.Tarefa_DAO;
 import com.planner.treina.entity.Tarefa;
 import com.planner.treina.entity.Usuario;
 
@@ -50,8 +50,9 @@ public class TarefaBean implements Serializable{
 	@PostConstruct
 	public void listarTodas(){
 		try{
-			TarefaDAO tdao = new TarefaDAO();
-			tarefas = tdao.listarTodas();
+			//TarefaDAO tdao = new TarefaDAO();
+			Tarefa_DAO  tdao = new Tarefa_DAO();
+			tarefas = tdao.findAll();
 			
 		}catch (RuntimeException e) {
 			Messages.addGlobalError("Erro listar as tarefas !");
@@ -68,12 +69,13 @@ public class TarefaBean implements Serializable{
 		String msg =  "Tarefa salva com sucesso";
 		
 		try{
-			TarefaDAO tdao = new TarefaDAO();
+			//TarefaDAO tdao = new TarefaDAO();
+			Tarefa_DAO tdao = new Tarefa_DAO();
 			tdao.save(tarefa);
 			
 			//atualizar a tabela
 			tarefa = new Tarefa();
-			tarefas = tdao.listarTodas();
+			tarefas = tdao.findAll();
 			
 			Messages.addGlobalInfo(msg + " " + tarefa);
 			

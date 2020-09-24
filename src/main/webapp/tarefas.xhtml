@@ -12,7 +12,7 @@
 
 	<title>Sistema Seleção Planner</title>
 	<h:outputStylesheet library="css" name="jquery-ui.min.css"/>
-	<h:outputStylesheet library="css" name="theme.css"/> 
+	<h:outputStylesheet library="css" name="file.css"/> 
 	<!-- configuracao abaixo para o calendario em Pt-Br -->
 	<script type="text/javascript" src="pt.js"></script>
 	<script  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
@@ -31,7 +31,7 @@
 			<h:form>
 				<p:panel header="" styleClass="ui-widget">
 					<h:panelGrid columns="3" id="pnlCadUsuario">
-						<h:outputLabel value="Bem vindo," styleClass="ui-widget .ui-widget"/>
+						<h:outputLabel value="Bem vindo,  #{loginBean.usuario.usuario}" styleClass="ui-widget .ui-widget"/>
 						<h:outputText value="#{loginBean.usuarioLogado.usuario}"/>
 						<p:commandButton value="Sair" styleClass="ui-widget .ui-widget"/>
 					</h:panelGrid>
@@ -61,7 +61,7 @@
 				<p:dataTable id="tblTarefa" value="#{tarefaBean.tarefas}" var="tarefaVar" styleClass="ui-widget"
 					emptyMessage="Nenhum registro encontrado" paginator="True">
 					
-					<p:column headerText="ID.TAREFA">
+					<p:column headerText="ID.TAREFA" style="width: 80px">
 						<h:outputText value="#{tarefaVar.id}"/>
 					</p:column>
 					<p:column headerText="TITULO.TAREFA">
@@ -93,7 +93,8 @@
 						
 						<p:commandButton value="Salvar" actionListener="#{tarefaBean.salvar() }"
 							update=":mensagem :formCadTarefa:plnCadTarefa :formListaTarefa:tblTarefa"/>
-						<p:commandButton value="Fechar" oncomplete="PF('dglCadastroTarefa').hide();"/>
+						<p:commandButton value="Fechar" process="@this"
+							oncomplete="PF('dglCadastroTarefa').hide();"/>
 					</h:panelGrid>
 				</h:form>
 			

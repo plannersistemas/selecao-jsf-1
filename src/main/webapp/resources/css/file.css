@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+body{
+	font-size: 12px;
+	font-family:"Helvetica Neue", Helventica, Arial, sans-serify;
+	margin: 20px;
+}
+
+h1{
+	font-size: 24px;
+	font-weight: 450;
+	color: #3bb4d64 !important;
+}
+
+.myTable td:nth-child(1) {
+     width: 20px;
+} 

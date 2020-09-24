@@ -19,6 +19,7 @@
     padding: 1px;
     padding-bottom: 1px;
     padding-top: 1px;
+    font-size: 80%;
 }
 
 --novo
@@ -29,6 +30,7 @@
     font-size: 8px;
     height:95%;
     color: navy;
+    font-size: 80%;
 }
 
 .ui-widget input,
@@ -45,6 +47,7 @@
 	padding-top: 0px;
 	padding-bottom: 0px;
 	margin: 0px;
+	font-size: 80%;
 	
 }
 /* --para os dialogs --*/

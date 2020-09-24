@@ -9,6 +9,10 @@
 	
 }
 
+body {
+ font-size: 10px;
+}
+
 .ui-dialog-titlebar{
 	height: 85%;
 	width: 100%

@@ -11,6 +11,7 @@ import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
 import com.planner.dao.UsuarioDAO;
+import com.planner.dao.Usuario_DAO;
 import com.planner.treina.entity.Usuario;
 
 @ManagedBean
@@ -63,7 +64,8 @@ public class LoginBean implements Serializable{
 		System.out.println("autenticar " + usuario.getSenha() );
 	
 		try {
-			UsuarioDAO udao = new UsuarioDAO();
+			//UsuarioDAO udao = new UsuarioDAO();
+			Usuario_DAO udao = new Usuario_DAO();
 			usuarioLogado = udao.login(usuario.getLogin(), usuario.getSenha() );
 			
 			if(usuarioLogado ==  null){

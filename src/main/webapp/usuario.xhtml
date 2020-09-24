@@ -8,13 +8,12 @@
 
 <h:head>
 	
-	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 
 	<title>Sistema Seleção Planner</title>
-	<
-	
+	<h:outputStylesheet library="css" name="jquery-ui.min.css"/>
+	<h:outputStylesheet library="css" name="file.css"/> 
 	<!-- configuracao abaixo para o calendario em Pt-Br -->
 	<script type="text/javascript" src="pt.js"></script>
 	<script  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
@@ -31,7 +30,7 @@
 			<h:form >
 				<p:panel header="" styleClass="panel">
 					<h:panelGrid columns="3" id="pnlCadUsuario">
-						<h:outputLabel value="Bem vindo," styleClass="ui-widget .ui-widget"/>
+						<h:outputLabel value="Bem vindo,  #{loginBean.usuario.usuario}" styleClass="ui-widget .ui-widget"/>
 						<h:outputText value="#{loginBean.usuarioLogado.usuario}"/>
 						<p:commandButton value="Sair" actionListener="#{loginBean.sair}"
 							styleClass="ui-widget .ui-widget"/>
@@ -63,7 +62,7 @@
 				<p:dataTable id="tblUsuario" value="#{usuarioBean.usuarios}" var="userVar" 
 					emptyMessage="Nenhum registro encontrado" paginator="True">
 					
-					<p:column headerText="ID.USUARIO">
+					<p:column headerText="ID.USUARIO" style="width: 80px">
 						<h:outputText value="#{userVar.id}"/>
 					</p:column>
 					<p:column headerText="USUARIO">
@@ -87,17 +86,21 @@
 				<h:form id="formCadUsuario">
 					<h:panelGrid columns="2" id="pnlCadUsuario">
 						<p:outputLabel value="Nome usuário:" />
-						<p:inputText value="#{usuarioBean.usuario.usuario}" size="20"/>
+						<p:inputText value="#{usuarioBean.usuario.usuario}" 
+							required="True" requiredMessage="O campo usuário é necessário" size="20"/>
 						
 						<p:outputLabel value="Login usuário:" />
-						<p:inputText value="#{usuarioBean.usuario.login}" size="20"/>
+						<p:inputText value="#{usuarioBean.usuario.login}"
+							requiredMessage="O campo login é necessário"  required="True" size="20"/>
 						
 						<p:outputLabel value="Senha usuário:" />
-						<p:password value="#{usuarioBean.usuario.senha}" size="20"/>
+						<p:password value="#{usuarioBean.usuario.senha}" 
+							required="True" requiredMessage="O campo senha é necessário" size="20"/>
 						
 						<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvar()}"
 							update=":mensagem :formCadUsuario:pnlCadUsuario :formListaUsuario:tblUsuario" />
-						<p:commandButton value="Fechar" oncomplete="PF('dglCadastroUsuario').hide();"/>
+						<p:commandButton value="Fechar" process="@this"
+							 oncomplete="PF('dglCadastroUsuario').hide();"/>
 					</h:panelGrid>
 				</h:form>
 			
