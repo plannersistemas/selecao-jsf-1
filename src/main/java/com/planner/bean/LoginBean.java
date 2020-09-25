@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
@@ -60,13 +61,10 @@ public class LoginBean implements Serializable{
 	
 	
 	public void autenticar(){
-		System.out.println("autenticar " + usuario.getLogin() );
-		System.out.println("autenticar " + usuario.getSenha() );
-	
+		
 		try {
-			//UsuarioDAO udao = new UsuarioDAO();
 			Usuario_DAO udao = new Usuario_DAO();
-			usuarioLogado = udao.login(usuario.getLogin(), usuario.getSenha() );
+			usuarioLogado = udao.login(usuario.getLogin(), usuario.getSenha()  );
 			
 			if(usuarioLogado ==  null){
 				Messages.addGlobalError("Login ou senha incorretos !");

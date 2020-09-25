@@ -12,30 +12,28 @@ import com.planner.treina.entity.Usuario;
 public class UsuarioDAOTest {
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void salvar(){
 		Usuario u1 = new Usuario();
+		u1.setId(10);
+		u1.setLogin("admin");
+		u1.setUsuario("admin");
+		u1.setSenha("admin");
 		
-		u1.setLogin("antonio@planner.com");
-		u1.setUsuario("Antonio.Antonio");
-		
-		//u1.setSenhaSemCriptografia("antonio");
-		u1.setSenha("antonio");
-		//UsuarioDAO udao = new UsuarioDAO();
 		Usuario_DAO udao = new Usuario_DAO();
 		udao.save(u1);
 		
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void autenticar(){
 		System.out.println("autenticar");
 		//UsuarioDAO udao = new UsuarioDAO();
 		Usuario_DAO udao = new Usuario_DAO();
 		Usuario u1 = new Usuario();
-		u1.setLogin("fernanda@planner.com");
-		u1.setSenha("fernanda");
+		u1.setLogin("marcia@planner.com");
+		u1.setSenha("marcia");
 		
 		//Usuario usuarioLogado = udao.autentica(u1.getLogin(), u1.getSenha() );
 		Usuario usuarioLogado = udao.login(u1.getLogin() , u1.getSenha() );
