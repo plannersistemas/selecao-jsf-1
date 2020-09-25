@@ -51,7 +51,8 @@ public class Tarefa_DAO {
 		return tarefa;
 	}
 	
-	public List findByUserId(Integer id){
+	@SuppressWarnings("unchecked")
+	public List<Tarefa> findByUserId(Integer id){
 		List<Tarefa> tarefas =  new ArrayList<Tarefa>();
 		EntityManager em = new ConnectionFactory().getConnection();
 		try{

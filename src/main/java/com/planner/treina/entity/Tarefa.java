@@ -1,6 +1,7 @@
 package com.planner.treina.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="tarefa")
@@ -27,6 +30,9 @@ public class Tarefa implements Serializable{
 	private Integer id;
 	private String titulo;
 	private String descricao;
+	
+	@Temporal(value = TemporalType.DATE)
+	private Date dataInicio;
 
 	@ManyToOne
 	@JoinColumn(name="id_usuario")
@@ -37,6 +43,14 @@ public class Tarefa implements Serializable{
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 	public String getTitulo() {
 		return titulo;
