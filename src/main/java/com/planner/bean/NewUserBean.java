@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.omnifaces.util.Messages;
 
-import com.planner.dao.UsuarioDAO;
+import com.planner.dao.Usuario_DAO;
 import com.planner.treina.entity.Usuario;
 
 @ManagedBean
@@ -47,7 +47,7 @@ public class NewUserBean implements Serializable {
 		
 	  
 		try{
-			UsuarioDAO udao = new UsuarioDAO();
+			Usuario_DAO udao = new Usuario_DAO();
 			udao.save(usuario);
 			
 			Messages.addGlobalInfo(msg + " " + usuario);

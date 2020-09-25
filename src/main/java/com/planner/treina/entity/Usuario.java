@@ -11,10 +11,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="usuario")
-@NamedQueries({
-	@NamedQuery(name="Usuario.listar", query= "SELECT u FROM Usuario u"),
-	@NamedQuery(name="Usuario.login", query= "SELECT u FROM Usuario u WHERE u.login =:login AND u.senha =:senha" )
-})
+
 
 
 public class Usuario {

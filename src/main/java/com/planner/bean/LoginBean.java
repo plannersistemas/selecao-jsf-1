@@ -10,7 +10,7 @@ import javax.faces.bean.SessionScoped;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
-import com.planner.dao.UsuarioDAO;
+
 import com.planner.dao.Usuario_DAO;
 import com.planner.treina.entity.Usuario;
 

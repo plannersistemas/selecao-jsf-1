@@ -22,13 +22,12 @@
 	<p:growl id="mensagem">
 	</p:growl>
 	
-	<p:panel header="Usuários" styleClass="ui-widget">
-	</p:panel>
+	
 
 	<div id="geral">
 		<div id="cabecalho" class="divCabecalho">
 			<h:form >
-				<p:panel header="" styleClass="panel">
+				<p:panel header="Usuários" styleClass="panel">
 					<h:panelGrid columns="3" id="pnlCadUsuario">
 						<h:outputLabel value="Bem vindo,  #{loginBean.usuario.usuario}" styleClass="ui-widget .ui-widget"/>
 						<h:outputText value="#{loginBean.usuarioLogado.usuario}"/>

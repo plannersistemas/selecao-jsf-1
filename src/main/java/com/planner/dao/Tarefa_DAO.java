@@ -72,6 +72,7 @@ public class Tarefa_DAO {
 	public List<Tarefa> findAll(){
 		List<Tarefa> tarefas =  new ArrayList<Tarefa>();
 		EntityManager em = new ConnectionFactory().getConnection();	
+		
 		try{
 			Query query = em.createNativeQuery("select * from tarefa", Tarefa.class);
 			tarefas = query.getResultList();

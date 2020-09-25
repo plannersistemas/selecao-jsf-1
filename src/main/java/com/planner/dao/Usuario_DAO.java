@@ -67,13 +67,14 @@ public class Usuario_DAO {
 		return usuario;
 	}
 	
-	
-	public List findAll(){
-		List<Usuario> usuarios =  null;
+	@SuppressWarnings("unchecked")
+	public List<Usuario> findAll(){
+		List<Usuario> usuarios =  new ArrayList<Usuario>();
 		EntityManager em = new ConnectionFactory().getConnection();
 		
 		try{
-			usuarios =  em.createQuery("From usuario").getResultList();
+			Query query = em.createNativeQuery("select * from usuario", Usuario.class);
+			usuarios = query.getResultList();
 		}catch (Exception e) {
 			em.getTransaction().rollback();
 		}finally{

@@ -6,7 +6,6 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.planner.dao.UsuarioDAO;
 import com.planner.dao.Usuario_DAO;
 import com.planner.treina.entity.Usuario;
 
@@ -48,8 +47,8 @@ public class UsuarioDAOTest {
 	@Test
 	@Ignore
 	public void listar(){
-		UsuarioDAO udao = new UsuarioDAO();
-		List<Usuario> usuarios = udao.listar();
+		Usuario_DAO udao = new Usuario_DAO();
+		List<Usuario> usuarios = udao.findAll();
 		
 		for(Usuario u : usuarios){
 			System.out.println(u);

@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 
 import org.omnifaces.util.Messages;
 
-import com.planner.dao.UsuarioDAO;
+import com.planner.dao.Usuario_DAO;
 import com.planner.treina.entity.Usuario;
 
 
@@ -60,8 +60,8 @@ public class UsuarioBean implements Serializable{
 	@PostConstruct
 	public void listarTodos(){
 		try{
-			UsuarioDAO udao = new UsuarioDAO();
-			usuarios = udao.listar();
+			Usuario_DAO udao = new Usuario_DAO();
+			usuarios = udao.findAll();
 			
 		}catch (RuntimeException e) {
 			Messages.addGlobalError("Erro listar os usuários !");
@@ -93,12 +93,12 @@ public class UsuarioBean implements Serializable{
 		String msg =  "Usuário salvo com sucesso";
 		
 		try{
-			UsuarioDAO udao = new UsuarioDAO();
+			Usuario_DAO udao = new Usuario_DAO();
 			udao.save(usuario);
 			
 			//atualizar a tabela
 			usuario = new Usuario();
-			usuarios = udao.listar();
+			usuarios = udao.findAll();
 			
 			Messages.addGlobalInfo(msg + " " + usuario);
 			

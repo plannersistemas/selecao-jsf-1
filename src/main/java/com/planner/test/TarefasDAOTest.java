@@ -6,9 +6,9 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.planner.dao.TarefaDAO;
+
 import com.planner.dao.Tarefa_DAO;
-import com.planner.dao.UsuarioDAO;
+
 import com.planner.treina.entity.Tarefa;
 import com.planner.treina.entity.Usuario;
 

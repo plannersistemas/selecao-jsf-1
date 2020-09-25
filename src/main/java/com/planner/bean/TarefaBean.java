@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
 
 import org.omnifaces.util.Messages;
 
-import com.planner.dao.TarefaDAO;
+
 import com.planner.dao.Tarefa_DAO;
 import com.planner.treina.entity.Tarefa;
 import com.planner.treina.entity.Usuario;
