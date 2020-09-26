@@ -58,11 +58,13 @@ public class TarefaBean implements Serializable{
 		    HttpSession session = request.getSession();
 
 		    Usuario logado = (Usuario)request.getSession().getAttribute("usuarioLogado");
-		    System.out.println("tarefa bean " + logado );
+		    System.out.println("tarefa bean, listando usando lgado em listar todas  " + logado );
 			
 			//TarefaDAO tdao = new TarefaDAO();
 			Tarefa_DAO  tdao = new Tarefa_DAO();
-			tarefas = tdao.findAll();
+			//tarefas = tdao.findAll();
+			
+			tarefas = tdao.findByUserId(logado.getId() );
 			
 			
 			

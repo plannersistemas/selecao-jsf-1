@@ -69,10 +69,17 @@
 		</dependency>
 
 		<!-- primefaces -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>5.2</version>
+			<scope>compile</scope>
+		</dependency>  -->
+		
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.2</version>
 			<scope>compile</scope>
 		</dependency>
 
