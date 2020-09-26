@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 
@@ -16,7 +17,7 @@ import com.planner.treina.entity.Usuario;
 
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class UsuarioBean implements Serializable{
 	/**
 	 * 

@@ -56,7 +56,7 @@ public class Tarefa_DAO {
 		List<Tarefa> tarefas =  new ArrayList<Tarefa>();
 		EntityManager em = new ConnectionFactory().getConnection();
 		try{
-			Query query = em.createNativeQuery("select * from tarefa where id_usuario = :id", Tarefa.class);
+			Query query = em.createNativeQuery("select * from tarefa where id_usuario = :id order by dataInicio", Tarefa.class);
 			query.setParameter("id", id);
 			tarefas = query.getResultList();
 		}catch (Exception e) {

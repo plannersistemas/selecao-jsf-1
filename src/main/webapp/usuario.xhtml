@@ -28,9 +28,9 @@
 			<h:form >
 				<p:panel header="SELEÇÃO PLANNER" styleClass="ui-widget">
 					<h:panelGrid columns="3" id="pnlCadUsuario">
-						<h:outputLabel value="Bem vindo,"   styleClass="ui-widget .ui-widget"/>
+						<h:outputLabel value="Bem vindo,"  styleClass="ui-widget .ui-widget"/>
 						<h:outputText value="#{loginBean.usuarioLogado.usuario}"/>
-						<p:commandButton value="Sair" styleClass="ui-widget .ui-widget"/>
+						<p:commandButton value="Sair"  actionListener="#{loginBean.sair}" styleClass="ui-widget .ui-widget"/>
 					</h:panelGrid>
 					 	
 				</p:panel>

@@ -6,6 +6,9 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.omnifaces.util.Faces;
@@ -70,6 +73,17 @@ public class LoginBean implements Serializable{
 				Messages.addGlobalError("Login ou senha incorretos !");
 				return;
 			}
+			
+			if(usuarioLogado != null){
+				FacesContext context = FacesContext.getCurrentInstance();  
+			    HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();  
+			    HttpSession session = request.getSession();
+
+			    request.getSession().setAttribute("usuarioLogado", usuarioLogado);
+			    System.out.println("tarefa bean " + usuarioLogado );
+			}
+			
+			
 			
 			
 			Faces.redirect("./usuario.xhtml");

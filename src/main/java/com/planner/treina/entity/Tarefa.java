@@ -70,11 +70,13 @@ public class Tarefa implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
 	@Override
 	public String toString() {
-		return "Tarefas [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", usuario=" + usuario + "]";
+		return "Tarefa [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", dataInicio=" + dataInicio
+				+ ", usuario=" + usuario + "]";
 	}
+	
+	
 	
 	
 }

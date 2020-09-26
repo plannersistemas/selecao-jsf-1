@@ -67,10 +67,10 @@ public class TarefasDAOTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void listarAllFromUser(){
 		Tarefa_DAO  tdao = new Tarefa_DAO();
-		Integer iduser = 1;
+		Integer iduser = 2;
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
 		tarefas = tdao.findByUserId(iduser);
 		

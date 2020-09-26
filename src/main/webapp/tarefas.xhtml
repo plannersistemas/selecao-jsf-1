@@ -28,7 +28,7 @@
 					<h:panelGrid columns="3" id="pnlCadTarefa">
 						<h:outputLabel value="Bem vindo,"  styleClass="ui-widget .ui-widget"/>
 						<h:outputText value="#{loginBean.usuarioLogado.usuario}"/>
-						<p:commandButton value="Sair" styleClass="ui-widget .ui-widget"/>
+						<p:commandButton value="Sair" actionListener="#{loginBean.sair}"  styleClass="ui-widget .ui-widget"/>
 					</h:panelGrid>
 					 	
 				</p:panel>
@@ -54,26 +54,36 @@
 			<ui:insert name="conteudo" />
 			<p:panel header="Tarefas" styleClass="ui-widget"/>
 			<h:form id="formListaTarefa" >
-				<p:dataTable id="tblTarefa" value="#{tarefaBean.tarefas}" var="tarefaVar" styleClass="ui-widget"
+				<p:dataTable id="tblTarefa" value="#{tarefaBean.tarefas}" var="tarefa" styleClass="ui-widget"
 					emptyMessage="Nenhum registro encontrado" paginator="True">
 					
 					<p:column headerText="ID.TAREFA" style="width: 80px">
-						<h:outputText value="#{tarefaVar.id}"/>
+						<h:outputText value="#{tarefa.id}"/>
 					</p:column>
-					<p:column headerText="TITULO.TAREFA">
-						<h:outputText value="#{tarefaVar.titulo}"/>
+					<p:column headerText="TITULO.TAREFA" style="width: 200px">
+						<h:outputText value="#{tarefa.titulo}"/>
 					</p:column>
 					<p:column headerText="DESCRICAO.TAREFA">
-						<h:outputText value="#{tarefaVar.descricao}"/>
+						<h:outputText value="#{tarefa.descricao}"/>
 					</p:column>
 					
-					<p:column headerText="DATA.TAREFA">
-						<h:outputText value="#{tarefaVar.dataInicio}" >
+					<p:column headerText="DATA.TAREFA"  style="width: 80px">
+						<h:outputText value="#{tarefa.dataInicio}" >
 							<f:convertDateTime pattern="dd.MM.yyyy" locale="pt_BR"
 								timeZone="America/Sao_Paulo"/>
 						</h:outputText>
 					</p:column>
 					
+					<p:column headerText="EDITAR" style="width: 150px">
+						<p:commandButton value="EDITAR" actionListener="#{tarefaBean.editar}" 
+							update=":mensagem :formCadTarefa:plnCadTarefa"
+						 	oncomplete="PF('dglCadastroTarefa').show();">
+						 	<f:attribute name="tarefaSelecionada" value="#{tarefa}"/>
+							
+						</p:commandButton>
+					</p:column>
+					
+										
 					<f:facet name="footer">
 						<p:commandButton value="Novo" actionListener="#{tarefaBean.novo}"
 						 oncomplete="PF('dglCadastroTarefa').show();"
@@ -84,15 +94,15 @@
 			</h:form>
 			
 			<!-- janela modal -->
-			<p:dialog header="TAREFA CADASTRO" widgetVar="dglCadastroTarefa" styleClass="ui-dialog"
+			<p:dialog header="TAREFA CADASTRO" widgetVar="dglCadastroTarefa"  width="500" height="300"
 				draggable="false"  resizable="false" modal="true">
 				<h:form id="formCadTarefa">
-					<h:panelGrid id="plnCadTarefa" columns="2">
+					<h:panelGrid id="plnCadTarefa" columns="2" >
 						<p:outputLabel value="Título Tarefa :" />
-						<p:inputText value="#{tarefaBean.tarefa.titulo}" size="20"/>
+						<p:inputText value="#{tarefaBean.tarefa.titulo}" />
 						
 						<p:outputLabel value="Descrição Tarefa :" />
-						<p:inputText value="#{tarefaBean.tarefa.descricao}" size="20"/>
+						<p:inputTextarea value="#{tarefaBean.tarefa.descricao}" style="width: 100% ;max-width: 90%;"/>
 						
 						<p:commandButton value="Salvar" actionListener="#{tarefaBean.salvar() }"
 							update=":mensagem :formCadTarefa:plnCadTarefa :formListaTarefa:tblTarefa"/>
@@ -102,6 +112,9 @@
 				</h:form>
 			
 			</p:dialog>
+			
+			
+			
 		</div>
 
 	
