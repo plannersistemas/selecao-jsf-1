@@ -2,6 +2,7 @@ package com.planner.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -69,6 +70,9 @@ public class LoginBean implements Serializable{
 			Usuario_DAO udao = new Usuario_DAO();
 			usuarioLogado = udao.login(usuario.getLogin(), usuario.getSenha()  );
 			
+			
+			TimeUnit.SECONDS.sleep(5);
+			
 			if(usuarioLogado ==  null){
 				Messages.addGlobalError("Login ou senha incorretos !");
 				return;
@@ -87,7 +91,7 @@ public class LoginBean implements Serializable{
 			
 			
 			Faces.redirect("./usuario.xhtml");
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			Messages.addGlobalError(e.getMessage() );
 			e.printStackTrace();
 		}

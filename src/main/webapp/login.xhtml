@@ -17,9 +17,7 @@
 	<p:dialog header="Login" closable="false" 
 		resizable="false" draggable="false" visible="true">
 		
-		
 		<h:form>
-		
 		
 			<h:panelGrid columns="2">
 				<p:outputLabel for="login" value="login" />
@@ -32,23 +30,30 @@
 				
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton widgetVar="saveButton" onstart="PF('progressPanel').show();"
+				<p:commandButton widgetVar="saveButton" onstart="PF('dlgProgress').show();PF('progressPanel').show();"
 					onclick="PF('saveButton').disable();"
 					value="Entrar" actionListener="#{loginBean.autenticar}"  update="mensagem"/>
 			</h:panelGrid>
 			
-			<p:panel widgetVar="progressPanel"
-                 visible="false"
-                 style="border:none;"
-                 closable="true"
-                 toggleable="true">
-            	<p:progressBar  style="height:20px;width:400px;"
-                           mode="indeterminate"/>
-        	 </p:panel>
+			
 		</h:form>
 		<h:form>
 			<h:commandButton value="Novo usuario" action="#{newUserBean.nova()}" />
 		</h:form>
+	</p:dialog>
+	
+	<p:dialog header="Aguarde" closable="false" widgetVar="dlgProgress" width="500" height="300">
+		<h:form>
+			<p:panel widgetVar="progressPanel"
+	                 visible="false"
+	                 style="border:none;"
+	                 closable="true"
+	                 toggleable="true">
+	            	<p:progressBar  style="height:20px;width:400px;" mode="indeterminate"/>
+	        	 </p:panel>
+		</h:form>
+		
+	
 	</p:dialog>
 	
 	
