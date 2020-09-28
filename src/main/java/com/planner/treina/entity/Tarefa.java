@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,6 +33,9 @@ public class Tarefa implements Serializable{
 	private String titulo;
 	private String descricao;
 	
+	@Enumerated(EnumType.STRING)
+	private Prioridade prioridade;
+	
 	@Temporal(value = TemporalType.DATE)
 	private Date dataInicio;
 
@@ -46,6 +51,14 @@ public class Tarefa implements Serializable{
 	}
 	
 	
+	
+	
+	public Prioridade getPrioridade() {
+		return prioridade;
+	}
+	public void setPrioridade(Prioridade prioridade) {
+		this.prioridade = prioridade;
+	}
 	public Date getDataInicio() {
 		return dataInicio;
 	}

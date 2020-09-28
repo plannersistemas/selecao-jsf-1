@@ -1,6 +1,7 @@
 package com.planner.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +10,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +19,7 @@ import org.omnifaces.util.Messages;
 
 
 import com.planner.dao.Tarefa_DAO;
+import com.planner.treina.entity.Prioridade;
 import com.planner.treina.entity.Tarefa;
 import com.planner.treina.entity.Usuario;
 
@@ -32,6 +36,10 @@ public class TarefaBean implements Serializable{
 	private Tarefa tarefa;
 	private List<Tarefa> tarefas;
 	
+	private Prioridade[] listaPrioridade;
+	
+	
+	private Prioridade prioridade ;
 	
 
 	public Tarefa getTarefa() {
@@ -42,6 +50,25 @@ public class TarefaBean implements Serializable{
 		this.tarefa = tarefa;
 	}
 	
+	
+	
+
+	public Prioridade getPrioridade() {
+		return prioridade;
+	}
+
+	public void setPrioridade(Prioridade prioridade) {
+		this.prioridade = prioridade;
+	}
+
+	public Prioridade[] getListaPrioridade() {
+		return listaPrioridade;
+	}
+
+	public void setListaPrioridade(Prioridade[] listaPrioridade) {
+		this.listaPrioridade = listaPrioridade;
+	}
+
 	public List<Tarefa> getTarefas() {
 		return tarefas;
 	}
@@ -66,6 +93,7 @@ public class TarefaBean implements Serializable{
 			
 			tarefas = tdao.findByUserId(logado.getId() );
 			
+			listaPrioridade = Prioridade.values();
 			
 			
 			
@@ -92,8 +120,28 @@ public class TarefaBean implements Serializable{
 	public void salvar(){
 		String msg =  "Tarefa salva com sucesso";
 		try{
+			
+			FacesContext context = FacesContext.getCurrentInstance();  
+		    HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();  
+		    HttpSession session = request.getSession();
+
+		    Usuario usuarioLogado = (Usuario)request.getSession().getAttribute("usuarioLogado");
+		    
+		    //Prioridade prioridadeSelecionada =  (Prioridade)request.getSession().getAttribute("prioridade");
+		    
+		    System.out.println("Prioridade selecionada : " + prioridade);
+		    
 			//TarefaDAO tdao = new TarefaDAO();
 			Tarefa_DAO tdao = new Tarefa_DAO();
+			
+			
+			tarefa.setDataInicio(new Date());
+			tarefa.setUsuario(usuarioLogado );
+			tarefa.setPrioridade(prioridade);
+			
+			
+			
+			
 			tdao.save(tarefa);
 			
 			//atualizar a tabela

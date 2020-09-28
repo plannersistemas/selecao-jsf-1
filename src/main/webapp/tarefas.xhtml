@@ -67,6 +67,10 @@
 						<h:outputText value="#{tarefa.descricao}"/>
 					</p:column>
 					
+					<p:column headerText="TAREFA.PRIORIDADE" style="width: 150px">
+						<h:outputText value="#{tarefa.prioridade.descricao}"/>
+					</p:column>
+					
 					<p:column headerText="DATA.TAREFA"  style="width: 80px">
 						<h:outputText value="#{tarefa.dataInicio}" >
 							<f:convertDateTime pattern="dd.MM.yyyy" locale="pt_BR"
@@ -94,7 +98,7 @@
 			</h:form>
 			
 			<!-- janela modal -->
-			<p:dialog header="TAREFA CADASTRO" widgetVar="dglCadastroTarefa"  width="500" height="300"
+			<p:dialog header="TAREFA CADASTRO" widgetVar="dglCadastroTarefa"  width="600" height="400"
 				draggable="false"  resizable="false" modal="true">
 				<h:form id="formCadTarefa">
 					<h:panelGrid id="plnCadTarefa" columns="2" >
@@ -104,10 +108,21 @@
 						<p:outputLabel value="Descrição Tarefa :" />
 						<p:inputTextarea value="#{tarefaBean.tarefa.descricao}" style="width: 100% ;max-width: 90%;"/>
 						
+						<p:outputLabel value="Prioridade :" />
+						<p:selectOneMenu value="#{tarefaBean.prioridade}">
+							<f:selectItem itemValue="" itemLabel="Selecione uma prioridade"/>
+							<f:selectItems value="#{tarefaBean.listaPrioridade}" var="prioridade"
+								itemValue="#{prioridade.descricao}"  itemLabel="#{prioridade.descricao}"/>
+						</p:selectOneMenu>
+						
 						<p:commandButton value="Salvar" actionListener="#{tarefaBean.salvar() }"
 							update=":mensagem :formCadTarefa:plnCadTarefa :formListaTarefa:tblTarefa"/>
 						<p:commandButton value="Fechar" process="@this"
 							oncomplete="PF('dglCadastroTarefa').hide();"/>
+						
+					</h:panelGrid>
+					
+					<h:panelGrid >
 					</h:panelGrid>
 				</h:form>
 			
