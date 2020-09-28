@@ -102,27 +102,30 @@
 				draggable="false"  resizable="false" modal="true">
 				<h:form id="formCadTarefa">
 					<h:panelGrid id="plnCadTarefa" columns="2" >
-						<p:outputLabel value="Título Tarefa :" />
-						<p:inputText value="#{tarefaBean.tarefa.titulo}" />
 						
-						<p:outputLabel value="Descrição Tarefa :" />
-						<p:inputTextarea value="#{tarefaBean.tarefa.descricao}" style="width: 100% ;max-width: 90%;"/>
+							<p:outputLabel value="Título Tarefa :" />
+							<p:inputText value="#{tarefaBean.tarefa.titulo}" />
 						
-						<p:outputLabel value="Prioridade :" />
-						<p:selectOneMenu value="#{tarefaBean.prioridade}">
-							<f:selectItem itemValue="" itemLabel="Selecione uma prioridade"/>
-							<f:selectItems value="#{tarefaBean.listaPrioridade}" var="prioridade"
-								itemValue="#{prioridade.descricao}"  itemLabel="#{prioridade.descricao}"/>
-						</p:selectOneMenu>
 						
-						<p:commandButton value="Salvar" actionListener="#{tarefaBean.salvar() }"
-							update=":mensagem :formCadTarefa:plnCadTarefa :formListaTarefa:tblTarefa"/>
-						<p:commandButton value="Fechar" process="@this"
-							oncomplete="PF('dglCadastroTarefa').hide();"/>
+							<p:outputLabel value="Descrição Tarefa :" />
+							<p:inputTextarea value="#{tarefaBean.tarefa.descricao}"/>
 						
-					</h:panelGrid>
+						
+							<p:outputLabel value="Prioridade :" />
+							<p:selectOneMenu value="#{tarefaBean.prioridade}">
+								<f:selectItem itemValue="" itemLabel="Selecione uma prioridade"/>
+								<f:selectItems value="#{tarefaBean.listaPrioridade}" var="prioridade"
+									itemValue="#{prioridade.descricao}"  itemLabel="#{prioridade.descricao}"/>
+							</p:selectOneMenu>
+						
+						<p:outputPanel>	
+							<p:commandButton value="Salvar" actionListener="#{tarefaBean.salvar() }"
+								update=":mensagem :formCadTarefa:plnCadTarefa :formListaTarefa:tblTarefa"/>
+							<p:commandButton value="Fechar" process="@this"
+								oncomplete="PF('dglCadastroTarefa').hide();"/>
+						</p:outputPanel>
 					
-					<h:panelGrid >
+					
 					</h:panelGrid>
 				</h:form>
 			
