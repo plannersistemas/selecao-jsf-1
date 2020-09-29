@@ -1,0 +1,64 @@
+<ui:composition template="/templates/menu.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:define name="corpo">
+	
+		<div id="conteudo">
+			<h:form id="formListaUsuario">
+				<p:dataTable id="tblUsuario" value="#{usuarioBean.usuarios}" var="userVar" 
+					emptyMessage="Nenhum registro encontrado" paginator="True">
+					
+					<p:column headerText="ID.USUARIO" style="width: 80px">
+						<h:outputText value="#{userVar.id}"/>
+					</p:column>
+					<p:column headerText="USUARIO">
+						<h:outputText value="#{userVar.usuario}"/>
+					</p:column>
+					<p:column headerText="LOGIN.USUARIO">
+						<h:outputText value="#{userVar.login}"/>
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton value="Novo" actionListener="#{usuarioBean.novo}"
+						 oncomplete="PF('dglCadastroUsuario').show();"
+						 update=":formCadUsuario:pnlCadUsuario"/>
+					</f:facet>
+				
+				</p:dataTable>
+			</h:form>
+			
+			<!-- janela modal -->
+			<p:dialog header="Usuário Cadastro" widgetVar="dglCadastroUsuario"
+				draggable="false"  resizable="false" modal="true">
+				<h:form id="formCadUsuario">
+					<h:panelGrid columns="2" id="pnlCadUsuario">
+						<p:outputLabel value="Nome usuário:" />
+						<p:inputText value="#{usuarioBean.usuario.usuario}" 
+							required="True" requiredMessage="O campo usuário é necessário" size="20"/>
+						
+						<p:outputLabel value="Login usuário:" />
+						<p:inputText value="#{usuarioBean.usuario.login}"
+							requiredMessage="O campo login é necessário"  required="True" size="20"/>
+						
+						<p:outputLabel value="Senha usuário:" />
+						<p:password value="#{usuarioBean.usuario.senha}" 
+							required="True" requiredMessage="O campo senha é necessário" size="20"/>
+						
+						<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvar()}"
+							update=":mensagem :formCadUsuario:pnlCadUsuario :formListaUsuario:tblUsuario" />
+						<p:commandButton value="Fechar" process="@this"
+							 oncomplete="PF('dglCadastroUsuario').hide();"/>
+					</h:panelGrid>
+				</h:form>
+			
+			</p:dialog>
+		</div>
+				
+				
+	
+		
+	</ui:define>
+</ui:composition>
