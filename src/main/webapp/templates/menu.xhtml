@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Seleção Planner</title>
+	<h:outputStylesheet library="css" name="jquery-ui.min.css" />
+	<h:outputStylesheet library="css" name="file.css" />
+	<!-- configuracao abaixo para o calendario em Pt-Br -->
+	<script type="text/javascript" src="pt.js"></script>
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+</h:head>
+
+<h:body>
+	<p:panel header="SELEÇÃO PLANNER" styleClass="panel">
+		<h:panelGrid columns="3" id="pnlCadUsuario">
+			<h:outputLabel value="Bem vindo," styleClass="ui-widget .ui-widget" />
+			<h:outputLabel value="Usuario" styleClass="ui-widget .ui-widget" />
+			<p:commandButton value="Sair" styleClass="ui-widget .ui-widget" />
+		</h:panelGrid>
+	</p:panel>
+
+	<p:growl id="mensagem" />
+		<h:form id="formMenu">
+			<p:menubar>
+				<p:submenu label="CADASTROS" styleClass="ui-widget .ui-widget">
+					<p:menuitem value="CADASTRO DE USUÁRIOS" url="/pages/usuario.xhtml" />
+					<p:menuitem value="CADASTRO DE TAREFAS" url="/pages/tarefa.xhtml" />
+				</p:submenu>
+				<p:submenu label="Ajuda">
+					<p:menuitem value="Sobre o Sistema"
+						oncomplete="PF('dlgSobre').show();" />
+				</p:submenu>
+			</p:menubar>
+		</h:form>
+	
+	
+	<ui:insert name="corpo">
+		<h1>corpo</h1>
+	</ui:insert>
+	
+
+		<!-- <h2> Rodapé da página</h2> -->
+		
+		
+		<p:dialog widgetVar="dlgSobre" draggable="false" closable="true"
+		resizable="false" modal="true" header="Sobre">
+		<h:form>
+			<h:panelGrid columns="1">
+				<p:outputLabel value="Versão: 2.0 " />
+				<p:outputLabel value="Responsável : Roberto Sousa at: robertokbs@gmail.com" />
+				<p:commandButton value="ok" onclick="PF('dlgSobre').hide();"/>		
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+
+</h:body>
+
+</html>

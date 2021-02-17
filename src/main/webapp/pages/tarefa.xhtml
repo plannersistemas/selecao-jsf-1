@@ -1,0 +1,87 @@
+<ui:composition template="/templates/menu.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:define name="corpo">
+		
+		<div id="conteudo">
+			
+			<p:panel header="Tarefas" styleClass="ui-widget"/>
+			<h:form id="formListaTarefa" >
+				<p:dataTable id="tblTarefa" value="#{tarefaBean.tarefas}" var="tarefa" styleClass="ui-widget"
+					emptyMessage="Nenhum registro encontrado" paginator="True">
+					
+					<p:column headerText="ID.TAREFA" style="width: 80px">
+						<h:outputText value="#{tarefa.id}"/>
+					</p:column>
+					<p:column headerText="TITULO.TAREFA" style="width: 200px">
+						<h:outputText value="#{tarefa.titulo}"/>
+					</p:column>
+					<p:column headerText="DESCRICAO.TAREFA">
+						<h:outputText value="#{tarefa.descricao}"/>
+					</p:column>				
+					<p:column headerText="TAREFA.PRIORIDADE" style="width: 150px">
+						<h:outputText value="#{tarefa.prioridade.descricao}"/>
+					</p:column>			
+					<p:column headerText="DATA.TAREFA"  style="width: 80px">
+						<h:outputText value="#{tarefa.dataInicio}" >
+							<f:convertDateTime pattern="dd.MM.yyyy" locale="pt_BR"
+								timeZone="America/Sao_Paulo"/>
+						</h:outputText>
+					</p:column>					
+					<p:column headerText="EDITAR" style="width: 150px">
+						<p:commandButton value="EDITAR" actionListener="#{tarefaBean.editar}" 
+							update=":mensagem :formCadTarefa:plnCadTarefa"
+						 	oncomplete="PF('dglCadastroTarefa').show();">
+						 	<f:attribute name="tarefaSelecionada" value="#{tarefa}"/>
+							
+						</p:commandButton>
+					</p:column>
+													
+					<f:facet name="footer">
+						<p:commandButton value="Novo" actionListener="#{tarefaBean.novo}"
+						 oncomplete="PF('dglCadastroTarefa').show();"
+						 update=":formCadTarefa:plnCadTarefa"/>
+					</f:facet>
+				
+				</p:dataTable>
+			</h:form>
+			
+			<!-- janela modal -->
+			<p:dialog header="TAREFA CADASTRO" widgetVar="dglCadastroTarefa"  width="600" height="400"
+				draggable="false"  resizable="false" modal="true">
+				<h:form id="formCadTarefa">
+					<h:panelGrid id="plnCadTarefa" columns="2" >
+						
+							<p:outputLabel value="Título Tarefa :" />
+							<p:inputText value="#{tarefaBean.tarefa.titulo}" />
+											
+							<p:outputLabel value="Descrição Tarefa :" />
+							<p:inputTextarea value="#{tarefaBean.tarefa.descricao}"/>
+										
+							<p:outputLabel value="Prioridade :" />
+							<p:selectOneMenu value="#{tarefaBean.prioridade}">
+								<f:selectItem itemValue="" itemLabel="Selecione uma prioridade"/>
+								<f:selectItems value="#{tarefaBean.listaPrioridade}" var="prioridade"
+									itemValue="#{prioridade.descricao}"  itemLabel="#{prioridade.descricao}"/>
+							</p:selectOneMenu>
+						
+						<p:outputPanel>	
+							<p:commandButton value="Salvar" actionListener="#{tarefaBean.salvar() }"
+								update=":mensagem :formCadTarefa:plnCadTarefa :formListaTarefa:tblTarefa"/>
+							<p:commandButton value="Fechar" process="@this"
+								oncomplete="PF('dglCadastroTarefa').hide();"/>
+						</p:outputPanel>
+					</h:panelGrid>
+				</h:form>
+			
+			</p:dialog>
+			
+		</div>
+		
+	</ui:define>
+
+</ui:composition>

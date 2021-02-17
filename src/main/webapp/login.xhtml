@@ -6,21 +6,61 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<ui:composition template="_template.xhtml">
-
-		<ui:define name="titulo">
-				<p:outputPanel>Login</p:outputPanel>
-		</ui:define>
-
-		<ui:define name="conteudo">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Login</title>
+	
+</h:head>
+<h:body>
+	<p:growl id="mensagem"/>
+	
+	<p:dialog header="Login" closable="false" 
+		resizable="false" draggable="false" visible="true">
 		
-			<p:messages globalOnly="true" />
+		<h:form>
 		
-			<h:form id="login">
-				<p:outputLabel value="#{loginBean.title}" />
-			</h:form>
-		</ui:define>
+			<h:panelGrid columns="2">
+				<p:outputLabel for="login" value="login" />
+				<p:inputMask id="login" value="#{loginBean.usuario.login}" onfocus="PF('saveButton').enable();"
+					required="true" requiredMessage="O campo login é obrigatório"/>
+				
+				<p:outputLabel for="senha" value="senha"/>
+				<p:password id="senha" value="#{loginBean.usuario.senha}"
+					maxlength="8" size="20" required="true" requiredMessage="O campo senha é obrigatório"/>
+				
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton widgetVar="saveButton" onstart="PF('dlgProgress').show();PF('progressPanel').show();"
+					onclick="PF('saveButton').disable();"
+					value="Entrar" actionListener="#{loginBean.autenticar}"  update="mensagem"/>
+			</h:panelGrid>
+			
+			
+		</h:form>
+		<h:form>
+			<h:commandButton value="Novo usuario" action="#{newUserBean.nova()}" />
+		</h:form>
+	</p:dialog>
+	
+	<p:dialog header="Aguarde" closable="false" widgetVar="dlgProgress" width="500" height="300">
+		<h:form>
+			<p:panel widgetVar="progressPanel"
+	                 visible="false"
+	                 style="border:none;"
+	                 closable="true"
+	                 toggleable="true">
+	            	<p:progressBar  style="height:20px;width:400px;" mode="indeterminate"/>
+	        	 </p:panel>
+		</h:form>
+		
+	
+	</p:dialog>
+	
+	
 
-	</ui:composition>
+	
 
+	
+
+</h:body>
 </html>

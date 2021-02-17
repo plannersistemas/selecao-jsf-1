@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+	<title>Sistema Seleção Planner</title>
+	<h:outputStylesheet library="css" name="jquery-ui.min.css"/>
+	<h:outputStylesheet library="css" name="file.css"/> 
+	<!-- configuracao abaixo para o calendario em Pt-Br -->
+	<script type="text/javascript" src="pt.js"></script>
+	<script  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+</h:head>
+<h:body>
+	<p:growl id="mensagem">
+	</p:growl>
+	
+	
+
+		<div id="cabecalho" class="divCabecalho">
+			<h:form >
+				<p:panel header="SELEÇÃO PLANNER" styleClass="ui-widget">
+					<h:panelGrid columns="3" id="pnlCadUsuario">
+						<h:outputLabel value="Bem vindo,"  styleClass="ui-widget .ui-widget"/>
+						<h:outputText value="#{loginBean.usuarioLogado.usuario}"/>
+						<p:commandButton value="Sair"  actionListener="#{loginBean.sair}" styleClass="ui-widget .ui-widget"/>
+					</h:panelGrid>
+					 	
+				</p:panel>
+			</h:form>
+			<h:form id="formMenu">
+				<p:menubar>
+					<p:submenu label="CADASTROS">
+						<p:menuitem value="CADASTRO DE USUÁRIOS" 
+							url="/usuario.xhtml" />
+						
+						<p:menuitem value="CADASTRO DE TAREFAS" 
+							url="/tarefas.xhtml" />			
+					</p:submenu>
+					<p:submenu label="Ajuda">
+						<p:menuitem value="Sobre o Sistema"
+							oncomplete="PF('dlgSobre').show();" />
+					</p:submenu>		
+				</p:menubar>
+			</h:form>
+		</div>
+
+		<div id="conteudo">
+			
+			<p:panel header="Usuários" styleClass="ui-widget"/>
+			<h:form id="formListaUsuario">
+				<p:dataTable id="tblUsuario" value="#{usuarioBean.usuarios}" var="userVar" 
+					emptyMessage="Nenhum registro encontrado" paginator="True">
+					
+					<p:column headerText="ID.USUARIO" style="width: 80px">
+						<h:outputText value="#{userVar.id}"/>
+					</p:column>
+					<p:column headerText="USUARIO">
+						<h:outputText value="#{userVar.usuario}"/>
+					</p:column>
+					<p:column headerText="LOGIN.USUARIO">
+						<h:outputText value="#{userVar.login}"/>
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton value="Novo" actionListener="#{usuarioBean.novo}"
+						 oncomplete="PF('dglCadastroUsuario').show();"
+						 update=":formCadUsuario:pnlCadUsuario"/>
+					</f:facet>
+				
+				</p:dataTable>
+			</h:form>
+			
+			<!-- janela modal -->
+			<p:dialog header="Usuário Cadastro" widgetVar="dglCadastroUsuario"
+				draggable="false"  resizable="false" modal="true">
+				<h:form id="formCadUsuario">
+					<h:panelGrid columns="2" id="pnlCadUsuario">
+						<p:outputLabel value="Nome usuário:" />
+						<p:inputText value="#{usuarioBean.usuario.usuario}" 
+							required="True" requiredMessage="O campo usuário é necessário" size="20"/>
+						
+						<p:outputLabel value="Login usuário:" />
+						<p:inputText value="#{usuarioBean.usuario.login}"
+							requiredMessage="O campo login é necessário"  required="True" size="20"/>
+						
+						<p:outputLabel value="Senha usuário:" />
+						<p:password value="#{usuarioBean.usuario.senha}" 
+							required="True" requiredMessage="O campo senha é necessário" size="20"/>
+						
+						<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvar()}"
+							update=":mensagem :formCadUsuario:pnlCadUsuario :formListaUsuario:tblUsuario" />
+						<p:commandButton value="Fechar" process="@this"
+							 oncomplete="PF('dglCadastroUsuario').hide();"/>
+					</h:panelGrid>
+				</h:form>
+			
+			</p:dialog>
+		</div>
+
+	
+	<p:dialog widgetVar="dlgSobre" draggable="false" closable="true"
+		resizable="false" modal="true" header="Sobre">
+		<h:form>
+			<h:panelGrid columns="1">
+				<p:outputLabel value="Versão: 2.0 " />
+				<p:outputLabel value="Responsável : Roberto Sousa at: robertokbs@gmail.com" />
+				<p:commandButton value="ok" onclick="PF('dlgSobre').hide();"/>		
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+</h:body>
+</html>

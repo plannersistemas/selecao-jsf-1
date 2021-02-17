@@ -1,0 +1,3 @@
+
+--CRIACAO DE UM USARIO NOVO
+INSERT INTO USUARIO (login, senha, usuario) VALUES ("adminstrador", "123", "admin.admin");

@@ -1,18 +1,29 @@
 package com.planner.treina.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="tarefa")
-public class Tarefas implements Serializable{
+@NamedQueries({
+	@NamedQuery(name="Tarefa.listarTodas", query= "SELECT t FROM Tarefa t")
+})
+
+public class Tarefa implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,6 +32,12 @@ public class Tarefas implements Serializable{
 	private Integer id;
 	private String titulo;
 	private String descricao;
+	
+	@Enumerated(EnumType.STRING)
+	private Prioridade prioridade;
+	
+	@Temporal(value = TemporalType.DATE)
+	private Date dataInicio;
 
 	@ManyToOne
 	@JoinColumn(name="id_usuario")
@@ -31,6 +48,22 @@ public class Tarefas implements Serializable{
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	
+	
+	
+	public Prioridade getPrioridade() {
+		return prioridade;
+	}
+	public void setPrioridade(Prioridade prioridade) {
+		this.prioridade = prioridade;
+	}
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 	public String getTitulo() {
 		return titulo;
@@ -50,4 +83,13 @@ public class Tarefas implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	@Override
+	public String toString() {
+		return "Tarefa [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", dataInicio=" + dataInicio
+				+ ", usuario=" + usuario + "]";
+	}
+	
+	
+	
+	
 }

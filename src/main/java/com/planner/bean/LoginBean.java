@@ -1,49 +1,100 @@
 package com.planner.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.persistence.EntityManager;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.omnifaces.util.Faces;
+import org.omnifaces.util.Messages;
+
+
+import com.planner.dao.Usuario_DAO;
 import com.planner.treina.entity.Usuario;
 
-@Named
-@ViewScoped
-public class LoginBean implements Serializable {
-
-	private static final long serialVersionUID = -8699654255891466192L;
-
-	@Inject
-	private EntityManager em;
+@ManagedBean
+@SessionScoped
+public class LoginBean implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
-	private String title;
+	private Usuario usuario;
+	private Usuario usuarioLogado;
+	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	public Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+	
+	public void setUsuarioLogado(Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+	}
+	
 	@PostConstruct
-	private void init() {
-		this.title = "Login - do bean";
-		select();
+	public void iniciar(){
+		usuario = new Usuario();
+		usuarioLogado = new Usuario();
 	}
 	
-	private void select() {
+	public void sair(){
+		usuarioLogado = null;
 		
-		List<Usuario> usuarios = em.createQuery("from Usuario", Usuario.class).getResultList();
-		
-		for (Usuario usuario : usuarios) {
-			System.out.println(usuario.getUsuario());
+		if(usuarioLogado ==  null){
+			try {
+				Faces.redirect("./login.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
 	}
 	
-	public String getTitle() {
-		return title;
-	}
+	
+	public void autenticar(){
+		
+		try {
+			Usuario_DAO udao = new Usuario_DAO();
+			usuarioLogado = udao.login(usuario.getLogin(), usuario.getSenha()  );
+			
+			
+			TimeUnit.SECONDS.sleep(5);
+			
+			if(usuarioLogado ==  null){
+				Messages.addGlobalError("Login ou senha incorretos !");
+				return;
+			}
+			
+			if(usuarioLogado != null){
+				FacesContext context = FacesContext.getCurrentInstance();  
+			    HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();  
+			    HttpSession session = request.getSession();
 
-	public void setTitle(String title) {
-		this.title = title;
+			    request.getSession().setAttribute("usuarioLogado", usuarioLogado);
+			    System.out.println("tarefa bean " + usuarioLogado );
+			}
+			
+			
+			
+			
+			Faces.redirect("./usuario.xhtml");
+		} catch (IOException | InterruptedException e) {
+			Messages.addGlobalError(e.getMessage() );
+			e.printStackTrace();
+		}
 	}
 	
 }
